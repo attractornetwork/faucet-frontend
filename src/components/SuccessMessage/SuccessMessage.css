@@ -1,0 +1,58 @@
+.success-message {
+    display: flex;
+    border: 1px solid var(--success-color);
+    padding: 16px 16px 20px 13px;
+    position: relative;
+    margin-top: 36px;
+    background-color: var(--input-background);
+    border-radius: 8px;
+}
+
+.success-checkmark-icon {
+    width: 26px;
+    height: 26px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-image: url('../../../assets/images/ic_checkmark.svg');
+}
+
+.success-main {
+    margin-left: 12px;
+}
+
+.success-title {
+    margin: 0;
+    font-size: 16px;
+    color: var(--success-color);
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.success-description {
+    margin: 12px 0 0 0;
+    font-weight: 300;
+    color: var(--text-color)
+}
+
+.success-description a {
+    color: var(--link-color);
+    text-decoration: none;
+}
+
+.success-description a:hover {
+    text-decoration: underline;
+}
+
+.success-close-btn {
+    position: absolute;
+    top: 0;
+    color: var(--text-color);
+    right: 0;
+    padding: 10px 15px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    outline: none;
+}

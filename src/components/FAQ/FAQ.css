@@ -1,0 +1,20 @@
+section, section h2, section h3, section p {
+    color: var(--text-color) !important;
+}
+
+.ant-collapse > .ant-collapse-item > .ant-collapse-header {
+    padding: 16px 0;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+}
+
+.ant-collapse-content-box > p {
+    font-size: 16px;
+    font-weight: 300;
+    padding: 0 8px 8px 8px;
+}
+
+.collapse-items {
+    margin-top: 30px;
+}
