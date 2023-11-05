@@ -1,0 +1,11 @@
+server {
+  listen ${STATIC_SRV_PORT};
+  listen [::]:${STATIC_SRV_PORT};
+
+  root ${STATIC_DIR};
+  index index.html index.htm;
+
+  location / {
+    try_files $uri $uri/ =404;
+  }
+}
