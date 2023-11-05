@@ -1,0 +1,27 @@
+name: Deploy to hosting
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up SSH
+        uses: webfactory/ssh-agent@v0.5.2
+        with:
+          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
+
+      - name: Deploy to host
+        run: |
+          ssh -o StrictHostKeyChecking=no ${{ secrets.HOSTING_USER }}@${{ secrets.HOSTING_IP }} << 'ENDSSH'
+          cd ${{ secrets.HOSTING_APP_PATH }}
+          git pull
+          docker compose build
+          docker compose up -d
+          ENDSSH
