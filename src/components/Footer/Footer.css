@@ -8,3 +8,9 @@ footer {
     font-weight: 300;
     color: var(--text-color);
 }
+
+@media (max-width: 768px) {
+    footer {
+        font-size: 13px;
+    }
+}

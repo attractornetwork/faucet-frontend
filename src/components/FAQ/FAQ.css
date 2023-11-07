@@ -18,3 +18,13 @@ section, section h2, section h3, section p {
 .collapse-items {
     margin-top: 30px;
 }
+
+.faq-container {
+    margin: 0 30px 0 30px;
+}
+
+@media (max-width: 768px) {
+    .faq-container {
+        margin: 0 10px 0 10px;
+    }
+}

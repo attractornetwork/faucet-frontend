@@ -65,3 +65,24 @@
     transform: scaleX(1);
     transform-origin: bottom left;
 }
+
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        padding: 12px 20px;
+    }
+
+    .logo {
+        order: -1;
+        margin-bottom: 10px;
+    }
+
+    .menu {
+        justify-content: center;
+        margin-top: 10px;
+    }
+
+    .menu li {
+        margin: 0 10px;
+    }
+}

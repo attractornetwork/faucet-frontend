@@ -1,4 +1,4 @@
-import React, {useState, useEffect, useRef, useCallback} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {Input, Button, Form} from 'antd';
 import ReCAPTCHA from "react-google-recaptcha";
 import './FormSection.css';
@@ -17,8 +17,8 @@ const FormSection = ({captchaValue, setCaptchaValue, recaptchaRef}: FormSectionP
     const [state, setState] = useState({
         address: '',
         error: null as string | null,
-        tokenName: null as string | null,
-        tokenAmount: null as number | null,
+        tokenName: 'ATTRA',
+        tokenAmount: 1,
         availableBalance: null as number | null,
         enabled: true,
         isLoading: false,
@@ -119,16 +119,14 @@ const FormSection = ({captchaValue, setCaptchaValue, recaptchaRef}: FormSectionP
             <section>
                 <h1 className="section-title">Get Test Tokens</h1>
                 <p className="form-description">
-                    {state.tokenName && state.tokenAmount ? (
-                        <>
-                            This faucet transfers {state.tokenName} for testing and covering Gas fees on Attractor zkEVM
-                            testnet.
-                            <b> {state.tokenAmount} {state.tokenName}</b> per address per 24h is available.
-                            <br/>
-                            <br/>
-                            Available balance: <b>{state.availableBalance} {state.tokenName}</b>
-                        </>
-                    ) : "Loading faucet information..."}
+                    <>
+                        This faucet transfers {state.tokenName} for testing and covering Gas fees on Attractor zkEVM
+                        testnet.
+                        <b> {state.tokenAmount} {state.tokenName}</b> per address per 24h is available.
+                        <br/>
+                        <br/>
+                        Available balance: <b>{state.availableBalance} {state.tokenName}</b>
+                    </>
                 </p>
                 <Form onFinish={handleSubmit}>
                     <Form.Item
@@ -170,7 +168,7 @@ const FormSection = ({captchaValue, setCaptchaValue, recaptchaRef}: FormSectionP
                             }))}
                         >
                             Tokens are successfully sent. Check the transaction in the
-                            <a href={state.transactionUrl} target="_blank" rel="noopener noreferrer"> explorer</a>.
+                            <a href={state.transactionUrl} target="_blank" rel="noopener noreferrer"> explorer</a>
                         </SuccessMessage>
                     )}
                 </Form>
