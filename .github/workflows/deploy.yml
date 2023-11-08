@@ -21,7 +21,5 @@ jobs:
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.HOSTING_USER }}@${{ secrets.HOSTING_IP }} << 'ENDSSH'
           cd ${{ secrets.HOSTING_APP_PATH }}
-          git pull
-          docker compose build
-          docker compose up -d
+          git pull && docker compose build && docker compose up -d
           ENDSSH
