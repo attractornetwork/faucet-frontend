@@ -40,7 +40,7 @@ const FAQ: React.FC = () => {
                                 before going live on mainnet.</p>
                         </Panel>
 
-                        <Panel header='I get an error saying “Incorrect wallet address".' key="5">
+                        <Panel header='I get an error saying “Incorrect wallet address"' key="5">
                             <p>An Ethereum-based wallet address is 42 characters long including the “0x” in the
                                 beggining. We support only wallets that follow this spec, so please make sure your
                                 wallet meets the criteria. If issues persist, you can contact our Support.</p>
