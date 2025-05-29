@@ -10,14 +10,14 @@ const Footer: React.FC = () => {
                     params: [
                         {
                             chainId: '0x25E5',
-                            chainName: 'Attractor Shapley',
+                            chainName: 'Attractor Testnet',
                             nativeCurrency: {
                                 name: 'ATTRA',
                                 symbol: 'ATTRA',
                                 decimals: 18,
                             },
-                            rpcUrls: ['https://rpc.shapley.attra.me/'],
-                            blockExplorerUrls: ['https://explorer.shapley.attra.me/'],
+                            rpcUrls: ['https://rpc.testnet.attra.me/'],
+                            blockExplorerUrls: ['https://explorer.testnet.attra.me/'],
                         },
                     ],
                 });
@@ -32,7 +32,7 @@ const Footer: React.FC = () => {
 
     return (
         <footer>
-            © 2023 Attractor Network | All rights reserved
+            © 2025 Attractor Network | All rights reserved
             <button className="metamask-import-button" onClick={addNetworkToMetaMask}>
                 Add Attractor Network
             </button>
