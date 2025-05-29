@@ -1,4 +1,5 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import './Footer.css';
 
 const Footer: React.FC = () => {
@@ -21,14 +22,49 @@ const Footer: React.FC = () => {
                         },
                     ],
                 });
-            } catch (error) {
+                toast.success('Attractor Testnet successfully added to MetaMask!', {
+                    position: "top-right",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                });
+            } catch (error: any) {
                 console.error('Error adding network to MetaMask', error);
+                
+                // Check if the error is about existing network
+                if (error.code === -32602 && error.message.includes('nativeCurrency.symbol')) {
+                    toast.info('Attractor Testnet is already added to your MetaMask!', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    });
+                } else {
+                    toast.error('Failed to add network to MetaMask. Please try again.', {
+                        position: "top-right",
+                        autoClose: 5000,
+                        hideProgressBar: false,
+                        closeOnClick: true,
+                        pauseOnHover: true,
+                        draggable: true,
+                    });
+                }
             }
         } else {
-            console.error('MetaMask is not installed');
+            toast.error('MetaMask is not installed. Please install MetaMask to use this feature.', {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
         }
     };
-
 
     return (
         <footer>

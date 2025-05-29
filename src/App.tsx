@@ -1,4 +1,6 @@
 import React, { useState, useRef } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header/Header';
 import FormSection from './components/Form/FormSection';
 import FAQ from './components/FAQ/FAQ';
@@ -26,6 +28,7 @@ function App() {
                 onChange={onReCAPTCHAVerified}
             />
             <Footer />
+            <ToastContainer />
         </div>
     );
 }
