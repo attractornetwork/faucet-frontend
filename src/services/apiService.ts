@@ -4,7 +4,10 @@ import {FaucetInfoResponse, TriggerRequest, TriggerResponse} from "./DTO";
 
 class ApiService {
     private http = axios.create({
-        baseURL: process.env.REACT_APP_BACKEND_URL
+        baseURL: process.env.REACT_APP_BACKEND_URL,
+        headers: {
+            'X-Real-IP': window.location.hostname === 'localhost' ? '127.0.0.1' : undefined
+        }
     });
 
     private async handleRequest<T>(request: Promise<AxiosResponse<T>>): Promise<T> {

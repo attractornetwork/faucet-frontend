@@ -11,4 +11,4 @@ services:
         - REACT_APP_RECAPTCHA_KEY
         - STATIC_SRV_PORT
     ports:
-      - ${LISTEN_ADDR}:${STATIC_SRV_PORT}
+      - "4000:${STATIC_SRV_PORT}"
