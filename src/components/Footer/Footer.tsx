@@ -5,15 +5,21 @@ import './Footer.css';
 const Footer: React.FC = () => {
     const CHAIN_ID = '0x25E5'; // Attractor Testnet chainId
 
-    const checkIfNetworkExists = async (): Promise<boolean> => {
+    const switchToNetwork = async (): Promise<boolean> => {
         if (!window.ethereum) return false;
-        
+
         try {
-            const chainId = await window.ethereum.request({ method: 'eth_chainId' });
-            return chainId === CHAIN_ID;
-        } catch (error) {
-            console.error('Error checking chain ID:', error);
-            return false;
+            await window.ethereum.request({
+                method: 'wallet_switchEthereumChain',
+                params: [{ chainId: CHAIN_ID }],
+            });
+            return true;
+        } catch (switchError: any) {
+            // This error code indicates that the chain has not been added to MetaMask.
+            if (switchError.code === 4902) {
+                return false;
+            }
+            throw switchError;
         }
     };
 
@@ -52,10 +58,10 @@ const Footer: React.FC = () => {
         }
 
         try {
-            // First check if we're already on the correct network
-            const isOnCorrectNetwork = await checkIfNetworkExists();
-            if (isOnCorrectNetwork) {
-                toast.info('You are already connected to Attractor Testnet!', {
+            // First try to switch to the network
+            const switched = await switchToNetwork();
+            if (switched) {
+                toast.success('Successfully switched to Attractor Testnet!', {
                     position: "top-right",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -66,24 +72,25 @@ const Footer: React.FC = () => {
                 return;
             }
 
-            // Try to add the network
+            // If switching failed, try to add the network
             await window.ethereum.request({
                 method: 'wallet_addEthereumChain',
-                params: [
-                    {
-                        chainId: CHAIN_ID,
-                        chainName: 'Attractor Testnet',
-                        nativeCurrency: {
-                            name: 'ATTRA',
-                            symbol: 'ATTRA',
-                            decimals: 18,
-                        },
-                        rpcUrls: ['https://rpc.testnet.attra.me/'],
-                        blockExplorerUrls: ['https://explorer.testnet.attra.me/'],
+                params: [{
+                    chainId: CHAIN_ID,
+                    chainName: 'Attractor Testnet',
+                    nativeCurrency: {
+                        name: 'ATTRA',
+                        symbol: 'ATTRA',
+                        decimals: 18,
                     },
-                ],
+                    rpcUrls: ['https://rpc.testnet.attra.me/'],
+                    blockExplorerUrls: ['https://explorer.testnet.attra.me/'],
+                }],
             });
-            toast.success('Attractor Testnet successfully added to MetaMask!', {
+
+            // After adding, try to switch to it
+            await switchToNetwork();
+            toast.success('Attractor Testnet successfully added and switched to!', {
                 position: "top-right",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -109,6 +116,7 @@ const Footer: React.FC = () => {
                     <div>
                         <p>Failed to add network to MetaMask</p>
                         <p>Error: {error.message || 'Unknown error'}</p>
+                        <p>Please try again or contact support if the problem persists.</p>
                     </div>,
                     {
                         position: "top-right",
